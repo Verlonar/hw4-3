@@ -80,4 +80,14 @@ public class StudentController {
     public Faculty getStudentsFacultyByStudentsId(@PathVariable Long id) {
         return studentService.getStudentsFacultyByStudentsId(id);
     }
+
+    @GetMapping("/get-students-starting-with-a")
+    public ResponseEntity<Collection<String>> getStudentsStartingWithA() {
+        return ResponseEntity.ok(studentService.getStudentsStartingWithA());
+    }
+
+    @GetMapping("/get-average-students-age")
+    public ResponseEntity<Double> getAverageStudentsAge() {
+        return ResponseEntity.ok(studentService.getAverageStudentsAge());
+    }
 }
