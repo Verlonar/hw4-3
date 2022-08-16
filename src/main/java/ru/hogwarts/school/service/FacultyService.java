@@ -62,7 +62,7 @@ public class FacultyService {
                 .parallel()
                 .map(Faculty::getName)
                 .min((s1, s2) -> s2.length() - s1.length())
-                .get();
+                .orElseThrow();
     }
 
     public Integer task4() {

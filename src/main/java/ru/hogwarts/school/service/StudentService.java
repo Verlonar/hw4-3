@@ -98,6 +98,6 @@ public class StudentService {
                 .parallel()
                 .mapToLong(Student::getAge)
                 .average()
-                .getAsDouble();
+                .orElseThrow();
     }
 }
