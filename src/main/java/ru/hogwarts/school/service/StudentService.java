@@ -122,26 +122,25 @@ public class StudentService {
     }
 
     public void doSomeSynchronisedMagic() {
-        List<Student> allStudents = studentRepository.findAll();
+        List<Student> studentList = studentRepository.findAll();
 
-        printName(allStudents.get(0).getName());
-        printName(allStudents.get(1).getName());
+        printNames(studentList.subList(0, 2));
 
         Thread thread1 = new Thread(() -> {
-            printName(allStudents.get(2).getName());
-            printName(allStudents.get(3).getName());
+            printNames(studentList.subList(2, 4));
         });
 
         Thread thread2 = new Thread(() -> {
-            printName(allStudents.get(4).getName());
-            printName(allStudents.get(5).getName());
+           printNames(studentList.subList(4, 6));
         });
 
         thread1.start();
         thread2.start();
     }
 
-    private synchronized void printName(String name) {
-        System.out.println(name);
+    private synchronized void printNames(List<Student> studentList) {
+        for (Student student : studentList) {
+            System.out.println(student.getName());
+        }
     }
 }
