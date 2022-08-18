@@ -100,4 +100,47 @@ public class StudentService {
                 .average()
                 .orElseThrow();
     }
+
+    public void doSomeMagic() {
+        List<Student> allStudents = studentRepository.findAll();
+
+        System.out.println(allStudents.get(0).getName());
+        System.out.println(allStudents.get(1).getName());
+
+        Thread thread1 = new Thread(() -> {
+            System.out.println(allStudents.get(2).getName());
+            System.out.println(allStudents.get(3).getName());
+        });
+
+        Thread thread2 = new Thread(() ->{
+            System.out.println(allStudents.get(4).getName());
+            System.out.println(allStudents.get(5).getName());
+        });
+
+        thread1.start();
+        thread2.start();
+    }
+
+    public void doSomeSynchronisedMagic() {
+        List<Student> studentList = studentRepository.findAll();
+
+        printNames(studentList.subList(0, 2));
+
+        Thread thread1 = new Thread(() -> {
+            printNames(studentList.subList(2, 4));
+        });
+
+        Thread thread2 = new Thread(() -> {
+           printNames(studentList.subList(4, 6));
+        });
+
+        thread1.start();
+        thread2.start();
+    }
+
+    private synchronized void printNames(List<Student> studentList) {
+        for (Student student : studentList) {
+            System.out.println(student.getName());
+        }
+    }
 }

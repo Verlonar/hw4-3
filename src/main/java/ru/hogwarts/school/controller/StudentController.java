@@ -90,4 +90,14 @@ public class StudentController {
     public ResponseEntity<Double> getAverageStudentsAge() {
         return ResponseEntity.ok(studentService.getAverageStudentsAge());
     }
+
+    @GetMapping("/do-some-magic")
+    public void doSomeMagic() {
+        studentService.doSomeMagic();
+    }
+
+    @GetMapping("/do-some-synchronised-magic")
+    public void doSomeSynchronisedMagic() {
+        studentService.doSomeSynchronisedMagic();
+    }
 }
